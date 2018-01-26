@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  buttons: {text: string}[] = [
+    {text: 'button1'},
+    {text: 'button2'},
+    {text: 'button3'}
+  ];
 }
