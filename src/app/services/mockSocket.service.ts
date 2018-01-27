@@ -1,6 +1,6 @@
 // import { Card } from './../model/card';
-import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -17,8 +17,8 @@ export class MockSocketService {
 
 
     getCardsForRound(roundNr: number): any {
-        var cardsToRetur = this.getCardNumberForRound(roundNr);
-        var cardsObject = this.http.get("/assets/cards.json");
+        const cardsToRetur = this.getCardNumberForRound(roundNr);
+        const cardsObject = this.http.get('/assets/cards.json');
 
         return cardsObject;
     }
