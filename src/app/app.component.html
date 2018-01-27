@@ -15,10 +15,6 @@
   <span class="particletext bubbles">Bubbles</span>
 </div>-->
 
-
-
-
-
 <app-achievement *ngIf="shouldShowAchievement"></app-achievement>
 
 <div class="game-wrapper">
@@ -31,7 +27,7 @@
 
   <div class="right-part-wrapper">
     <div id="grid">
-      <div *ngFor="let button of selectedCards | async">
+      <div *ngFor="let button of availableCards | async">
         <div (click)="buttonClicked(button)">{{button.text}}</div>
       </div>
     </div>
