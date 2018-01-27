@@ -10,7 +10,7 @@ import { AppComponent } from '../../app.component';
 
 })
 export class AchievementComponent implements OnInit, AfterViewInit {
-  
+
   constructor( @Host() public parent: AppComponent) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class AchievementComponent implements OnInit, AfterViewInit {
 
 
     function confetti() {
-      
+
       $.each($(".particletext .confetti, .particletext .confetti-r"), function () {
         var confetticount = 15;
         for (var i = 0; i <= confetticount; i++) {
@@ -52,12 +52,11 @@ export class AchievementComponent implements OnInit, AfterViewInit {
       return Math.floor(Math.random() * (n - m + 1)) + m;
     }
 
-    initparticles();
+    // initparticles();
 
-    setTimeout(() => {
-      debugger;
-      this.parent.shouldShowAchievement = false;
-    }, 5000);
+    // setTimeout(() => {
+    //   this.parent.shouldShowAchievement = false;
+    // }, 5000);
 
   }
 

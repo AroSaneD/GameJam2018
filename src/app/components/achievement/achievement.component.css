@@ -1,6 +1,13 @@
-   .particletext {
+#achievement-holder{
+  position:absolute;
+  left: 20px;
+  bottom: 180px;
+  background-color: white;
+}
+
+.particletext {
     text-align: center;
-    font-size: 48px;
+    font-size: 20px;
     position: relative;
   }
 
