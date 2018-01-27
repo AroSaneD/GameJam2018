@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .md-raised:not([disabled]) {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   font-size: large;
@@ -15,15 +19,20 @@
 #grid {
   align-items: baseline;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
   #grid > div {
     display: block;
-    flex: 1 0 auto;
+    flex: 0 0 auto;
     height: 25px;
-    margin: 10px;
-    background-color: red;
     text-align: center;
     cursor: default !important;
+    flex-basis: 25%;
+  }
+
+  #grid > div > div {
+    margin: 10px;
+    background-color: red;
   }

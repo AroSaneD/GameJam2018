@@ -11,10 +11,10 @@
 </div>-->
 
 
-<div *ngFor="let button of buttons" id="grid" style="display: flex">
-  <div (click)="buttonClicked(button)">{{button.text}}</div>
-
-
+<div id="grid">
+  <div *ngFor="let button of buttons">
+    <div (click)="buttonClicked(button)">{{button.text}}</div>
+  </div>
 </div>
 
 <!--The content below is only a placeholder and can be replaced.-->
