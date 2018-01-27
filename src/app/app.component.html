@@ -35,7 +35,7 @@
   </div>
     <div class="selected-cards-holder grid">
         <div *ngFor="let button of selectedCards">
-            <div (click)="buttonClicked(button)">{{button.text}}</div>
+            <div (click)="buttonClicked(button)" [ngClass]="{'placeholder': button.isPlaceHolder}">{{button.text}}</div>
           </div>
     </div>
   </div>

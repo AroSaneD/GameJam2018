@@ -85,6 +85,10 @@ h2{
   display: inline-block;
 }
 
+.grid>div>div.placeholder{
+  background-color: #acacac;
+}
+
 .selected-cards-holder {
   border: 3px solid white;
   border-left: none;
