@@ -20,6 +20,7 @@ export class Card {
         public iconUrl: string,
         public soundUrl: string,
         public animationUrl: string,
+        public isPlaceHolder?: boolean,
         public languageBarrier?: Language
     ) {
 

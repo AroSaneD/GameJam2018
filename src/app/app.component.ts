@@ -1,6 +1,6 @@
 import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
-import { Component, AfterViewChecked, ViewEncapsulation  } from '@angular/core';
+import { Component, AfterViewChecked, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as $ from "jquery";
 
@@ -12,15 +12,26 @@ import * as $ from "jquery";
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements AfterViewChecked {
-  
+
   title = 'app';
 
   selectedCards: Observable<Card[]>;
-  availableCards: Card[];
-  shouldShowAchievement: boolean = false;
+  availableCards: Observable<Card[]>;
+
+  shouldSendCards: Observable<boolean> = Observable.create();
+
+  shouldShowAchievement = false;
+  public currentRound = 1;
+
+  startRound(): void {
+    this.availableCards = this.socketService.getCardsForRound(5);
+
+  }
+
+
 
   constructor(private socketService: MockSocketService) {
-    this.selectedCards = this.socketService.getCardsForRound(5);
+    this.startRound();
   }
 
   buttonClicked(button: any): void {
@@ -30,7 +41,7 @@ export class AppComponent implements AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    
+
   }
 
 }
