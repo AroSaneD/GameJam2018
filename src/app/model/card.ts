@@ -14,6 +14,7 @@ export class Card {
         throw new Error('Not implemented');
     }
 
+    public isSelected = false;
 
     constructor(
         public text: string,

@@ -85,6 +85,10 @@ h2{
   display: inline-block;
 }
 
+.grid>div>div.selected{
+  opacity: 0.3;
+}
+
 .grid>div>div.placeholder{
   background-color: #acacac;
 }

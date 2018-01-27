@@ -29,7 +29,7 @@
     <div class="grid-holder">
     <div class="grid">
       <div *ngFor="let button of availableCards | async">
-        <div (click)="buttonClicked(button)">{{button.text}}</div>
+        <div (click)="buttonClicked(button)" [ngClass]="{'selected': button.isSelected}">{{button.text}}</div>
       </div>
     </div>
   </div>
