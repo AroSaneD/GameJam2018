@@ -5,6 +5,10 @@
 
 h2{
   margin: 0;
+  color: #655989;
+  font-weight: bold;
+  font-size: 31px;
+  font-family: Arial;
 }
 
 
@@ -44,7 +48,18 @@ h2{
   width: 60px;
   height: 60px;
   border-radius: 60px;
-  background-color: red;
+}
+
+.player-holder>.player:nth-of-type(1){
+  background-color: #de88a3;
+}
+
+.player-holder>.player:nth-of-type(2){
+  background-color: #655989;
+}
+
+.player-holder>.player:nth-of-type(3){
+  background-color: #7a9db0
 }
 
 .right-part-wrapper {
