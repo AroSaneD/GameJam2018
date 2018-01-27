@@ -16,6 +16,11 @@
   margin: 8px;
 }
 
+.game-wrapper {
+  background: linear-gradient(to left, #355c7d, #c06c84, #f8b195);
+  height: 500px;
+}
+
 #grid {
   align-items: baseline;
   display: flex;
@@ -23,16 +28,16 @@
   flex-wrap: wrap;
 }
 
-  #grid > div {
-    display: block;
-    flex: 0 0 auto;
-    height: 25px;
-    text-align: center;
-    cursor: default !important;
-    flex-basis: 25%;
-  }
+#grid>div {
+  display: block;
+  flex: 0 0 auto;
+  height: 25px;
+  text-align: center;
+  cursor: default !important;
+  flex-basis: 25%;
+}
 
-  #grid > div > div {
-    margin: 10px;
-    background-color: red;
-  }
+#grid>div>div {
+  margin: 10px;
+  background-color: red;
+}
