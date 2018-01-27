@@ -20,13 +20,15 @@ export class MockSocketService {
         const cardsToRetur = this.getCardNumberForRound(roundNr);
         const cardsObject = this.http.get('/assets/cards.json').map(res => {
             return res.json().map(item => {
-                return new Card(item.text, null, null, null);
+                return new Card(item.text, item.path ? '/assets/' + item.path : null, null, null);
             });
         }).map((items: Card[]) => {
             const toReturn: Card[] = [];
             while (toReturn.length < cardsToRetur) {
                 const item = items[Math.floor(Math.random() * items.length)];
-                toReturn.push(item);
+                if (item.iconUrl) {
+                    toReturn.push(item);
+                }
             }
 
             return toReturn;

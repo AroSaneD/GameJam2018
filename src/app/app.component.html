@@ -29,13 +29,13 @@
     <div class="grid-holder">
     <div class="grid">
       <div *ngFor="let button of availableCards | async">
-        <div (click)="buttonClicked(button)" [ngClass]="{'selected': button.isSelected}">{{button.text}}</div>
+        <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
       </div>
     </div>
   </div>
     <div class="selected-cards-holder grid">
         <div *ngFor="let button of selectedCards">
-            <div (click)="buttonClicked(button)" [ngClass]="{'placeholder': button.isPlaceHolder}">{{button.text}}</div>
+            <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
           </div>
     </div>
   </div>

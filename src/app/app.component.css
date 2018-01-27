@@ -78,11 +78,14 @@ h2{
 
 .grid>div>div {
   margin: 10px;
-  background-color: red;
+  background-color: white;
   width: 75px;
   height: 75px;
   border-radius: 75px;
   display: inline-block;
+  background-position: center;
+  background-size: contain;
+  
 }
 
 .grid>div>div.selected{
