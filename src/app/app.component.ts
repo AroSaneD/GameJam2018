@@ -55,6 +55,9 @@ export class AppComponent {
       return c;
     });
 
+    if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
+      // todo send these cards to the next opponent
+    }
 
   }
 
