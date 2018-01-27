@@ -1,3 +1,4 @@
+import { Language } from './language';
 export class Card {
 
     get icon(): any {
@@ -18,7 +19,9 @@ export class Card {
         public text: string,
         public iconUrl: string,
         public soundUrl: string,
-        public animationUrl: string) {
+        public animationUrl: string,
+        public languageBarrier?: Language
+    ) {
 
     }
 

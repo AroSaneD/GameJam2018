@@ -25,11 +25,25 @@
 
 
 
-<div class="game-wrapper">
 
-  <div id="grid">
-    <div *ngFor="let button of selectedCards | async">
-      <div (click)="buttonClicked(button)">{{button.text}}</div>
+<app-achievement></app-achievement>
+
+<div class="game-wrapper">
+  <div class="player-holder">
+    <h2>PLAYERS: </h2>
+    <div class="player"></div>
+    <div class="player"></div>
+    <div class="player"></div>
+  </div>
+
+  <div class="right-part-wrapper">
+    <div id="grid">
+      <div *ngFor="let button of selectedCards | async">
+        <div (click)="buttonClicked(button)">{{button.text}}</div>
+      </div>
+    </div>
+    <div class="selected-cards-holder">
+
     </div>
   </div>
 
