@@ -11,7 +11,7 @@
 </div>-->
 
 
-<!--<div class="textcontainer">
+<!--<div>
   <span class="particletext bubbles">Bubbles</span>
 </div>-->
 
@@ -19,7 +19,7 @@
 
 
 
-<app-achievement></app-achievement>
+<app-achievement *ngIf="shouldShowAchievement"></app-achievement>
 
 <div class="game-wrapper">
   <div class="player-holder">

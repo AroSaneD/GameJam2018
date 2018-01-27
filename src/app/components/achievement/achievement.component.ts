@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewChecked, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, Host } from '@angular/core';
 import * as $ from "jquery";
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-achievement',
@@ -8,14 +9,14 @@ import * as $ from "jquery";
   encapsulation: ViewEncapsulation.None
 
 })
-export class AchievementComponent implements OnInit, AfterViewChecked {
+export class AchievementComponent implements OnInit, AfterViewInit {
   
-  constructor() { }
+  constructor( @Host() public parent: AppComponent) { }
 
   ngOnInit() {
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterViewInit(): void {
     //okpt("CSS Particle Effects");
     function initparticles() {
       //bubbles();
@@ -36,9 +37,9 @@ export class AchievementComponent implements OnInit, AfterViewChecked {
 
 
     function confetti() {
-
+      
       $.each($(".particletext .confetti, .particletext .confetti-r"), function () {
-        var confetticount = 4;
+        var confetticount = 15;
         for (var i = 0; i <= confetticount; i++) {
           $(this).append('<span class="particle c' + $.rnd(1, 2) + '" style="top:' + $.rnd(10, 50) + '%; left:' + $.rnd(0, 100) + '%;width:' + $.rnd(6, 8) + 'px; height:' + $.rnd(3, 4) + 'px;animation-delay: ' + ($.rnd(0, 30) / 10) + 's;"></span>');
         }
@@ -52,6 +53,11 @@ export class AchievementComponent implements OnInit, AfterViewChecked {
     }
 
     initparticles();
+
+    setTimeout(() => {
+      debugger;
+      this.parent.shouldShowAchievement = false;
+    }, 5000);
 
   }
 

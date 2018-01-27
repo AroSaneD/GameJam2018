@@ -17,6 +17,7 @@ export class AppComponent implements AfterViewChecked {
 
   selectedCards: Observable<Card[]>;
   availableCards: Card[];
+  shouldShowAchievement: boolean = false;
 
   constructor(private socketService: MockSocketService) {
     this.selectedCards = this.socketService.getCardsForRound(5);
@@ -24,6 +25,8 @@ export class AppComponent implements AfterViewChecked {
 
   buttonClicked(button: any): void {
     console.log(button.text);
+    //
+    this.shouldShowAchievement = true;
   }
 
   ngAfterViewChecked() {
