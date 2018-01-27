@@ -27,11 +27,8 @@ export class AppComponent implements AfterViewChecked {
     this.availableCards = this.socketService.getCardsForRound(16);
     this.availableCards.subscribe(item => {
       this.selectedCards.push(item[1]);
-      item[1].isSelected = true;
       this.selectedCards.push(item[4]);
-      item[4].isSelected = true;
       this.selectedCards.push(item[5]);
-      item[5].isSelected = true;
       this.selectedCards.push(new Card('test', null, null, null, true, null));
     });
   }
