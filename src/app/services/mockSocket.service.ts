@@ -1,4 +1,4 @@
-// import { Card } from './../model/card';
+import { Card } from './../model/card';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -16,9 +16,13 @@ export class MockSocketService {
     }
 
 
-    getCardsForRound(roundNr: number): any {
+    getCardsForRound(roundNr: number): Observable<Card[]> {
         const cardsToRetur = this.getCardNumberForRound(roundNr);
-        const cardsObject = this.http.get('/assets/cards.json');
+        const cardsObject = this.http.get('/assets/cards.json').map(res => {
+            return res.json().map(item => {
+              return new Card(item.text, null, null, null);
+            });
+          });
 
         return cardsObject;
     }

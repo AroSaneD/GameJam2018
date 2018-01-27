@@ -1,6 +1,7 @@
 import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +12,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  // selectedCards: Card[];
-  // availableCards: Card[];
+  selectedCards: Observable<Card[]>;
+  availableCards: Card[];
 
   constructor(private socketService: MockSocketService) {
-    this.socketService.getCardsForRound(5).map(res => {
-      return res.json().map(item => {
-        return item.text;
-      })
-    }).subscribe((a) => {
-      console.log(a);
-    });
+    this.selectedCards = this.socketService.getCardsForRound(5);
   }
 
   buttonClicked(button: any): void {

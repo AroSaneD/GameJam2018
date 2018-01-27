@@ -12,7 +12,7 @@
 
 
 <div id="grid">
-  <div *ngFor="let button of buttons">
+  <div *ngFor="let button of selectedCards | async">
     <div (click)="buttonClicked(button)">{{button.text}}</div>
   </div>
 </div>

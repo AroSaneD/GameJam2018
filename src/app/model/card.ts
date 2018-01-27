@@ -15,6 +15,7 @@ export class Card {
 
 
     constructor(
+        public text: string,
         public iconUrl: string,
         public soundUrl: string,
         public animationUrl: string) {
