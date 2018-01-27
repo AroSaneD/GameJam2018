@@ -13,16 +13,23 @@ export class AppComponent {
   title = 'app';
 
   selectedCards: Observable<Card[]>;
-  availableCards: Card[];
+  availableCards: Observable<Card[]>;
+
+  shouldSendCards: Observable<boolean> = Observable.create();
+
+  public currentRound = 1;
+
+  startRound(): void {
+    this.availableCards = this.socketService.getCardsForRound(5);
+
+  }
 
   constructor(private socketService: MockSocketService) {
-    this.selectedCards = this.socketService.getCardsForRound(5);
+    this.startRound();
   }
 
   buttonClicked(button: any): void {
     console.log(button.text);
   }
-
-
 
 }
