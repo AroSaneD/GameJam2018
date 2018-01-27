@@ -1,6 +1,6 @@
 import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
-import { Component, AfterViewChecked, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as $ from "jquery";
 
@@ -11,40 +11,50 @@ import * as $ from "jquery";
   providers: [MockSocketService],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent {
 
   title = 'app';
 
   selectedCards: Card[] = [];
-  availableCards: Observable<Card[]>;
+  availableCards: Card[] = [];
 
   shouldSendCards: Observable<boolean> = Observable.create();
 
   shouldShowAchievement = false;
   public currentRound = 1;
 
-  startRound(): void {
-    this.availableCards = this.socketService.getCardsForRound(16);
-    this.availableCards.subscribe(item => {
-      this.selectedCards.push(item[1]);
-      this.selectedCards.push(item[4]);
-      this.selectedCards.push(item[5]);
-      this.selectedCards.push(new Card('test', null, null, null, true, null));
-    });
+  startRound(previousSequence: Card[]): void {
+    if (previousSequence && previousSequence.length > 0) {
+      this.selectedCards = [...previousSequence, Card.placeholderCard];
+    } else {
+      this.selectedCards = [Card.placeholderCard, Card.placeholderCard];
+    }
+
+    const obs = this.socketService.getCardsForRound(this.currentRound);
+    obs.subscribe(cards => this.availableCards = cards);
+
+    // this.availableCards = this.socketService.getCardsForRound(this.currentRound);
   }
-
-
 
   constructor(private socketService: MockSocketService) {
-    this.startRound();
+    this.startRound(null);
   }
 
-  buttonClicked(button: any): void {
-    console.log(button.text);
-    this.shouldShowAchievement = true;
-  }
+  buttonClicked(button: Card, buttonIndex: number): void {
+    if (button.isSelected || this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
+      return;
+    }
 
-  ngAfterViewChecked() {
+    const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
+    this.selectedCards[indexOfFirstPlaceholder] = button;
+
+    this.availableCards = this.availableCards.map((c, i) => {
+      if (!c.isSelected) {
+        c.isSelected = buttonIndex === i;
+      }
+      return c;
+    });
+
 
   }
 

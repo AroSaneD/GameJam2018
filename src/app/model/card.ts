@@ -1,4 +1,5 @@
 import { Language } from './language';
+
 export class Card {
 
     get icon(): any {
@@ -27,6 +28,8 @@ export class Card {
 
     }
 
-
+    public static get placeholderCard(): Card {
+        return new Card(null, null, null, null, true);
+    }
 
 }

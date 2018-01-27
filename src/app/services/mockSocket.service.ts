@@ -10,24 +10,37 @@ export class MockSocketService {
 
     }
 
-    getCardNumberForRound(roundNr: number): number {
-        return Math.floor((roundNr - 1) / 2);
-
+    private getRandomElementFromArray(items: any[]): any {
+        return items[Math.floor(Math.random() * items.length)];
     }
 
-
-    getCardsForRound(roundNr: number): Observable<Card[]> {
-        const cardsToRetur = this.getCardNumberForRound(roundNr);
-        const cardsObject = this.http.get('/assets/cards.json').map(res => {
+    getCards(): Observable<Card[]> {
+        return this.http.get('/assets/cards.json').map(res => {
             return res.json().map(item => {
                 return new Card(item.text, item.path ? '/assets/' + item.path : null, null, null);
             });
-        }).map((items: Card[]) => {
+        });
+    }
+
+    getRandomCard(): Observable<Card> {
+        return this.getCards().map(cards => {
+            return this.getRandomElementFromArray(cards);
+        });
+    }
+
+
+    getCardNumberForRound(roundNr: number): number {
+        return 3 + roundNr;
+    }
+
+    getCardsForRound(roundNr: number): Observable<Card[]> {
+        const cardsToRetur = this.getCardNumberForRound(roundNr);
+        const cardsObject = this.getCards().map((items: Card[]) => {
             const toReturn: Card[] = [];
             while (toReturn.length < cardsToRetur) {
-                const item = items[Math.floor(Math.random() * items.length)];
+                const item = this.getRandomElementFromArray(items);
                 if (item.iconUrl) {
-                    toReturn.push(item);
+                    toReturn.push(Object.assign({}, item));
                 }
             }
 
@@ -36,9 +49,4 @@ export class MockSocketService {
 
         return cardsObject;
     }
-
-    getCardsForGuessing(cardsRecieved: any[], roundNr: number): any {
-
-    }
-
 }

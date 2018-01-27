@@ -28,8 +28,8 @@
   <div class="right-part-wrapper">
     <div class="grid-holder">
     <div class="grid">
-      <div *ngFor="let button of availableCards | async">
-        <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
+      <div *ngFor="let button of availableCards; let i = index">
+        <div (click)="buttonClicked(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
       </div>
     </div>
   </div>
