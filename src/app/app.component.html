@@ -1,7 +1,21 @@
-<ul>
-  <li *ngFor="let button of buttons">{{button.text}}</li>
-</ul>
+<!--<div layout="row" layout-align="center center">
+  <div>
+    <button class="md-raised">Start</button>
+  </div>
+  <div>
+    <button class="md-raised">Credits</button>
+  </div>
+  <div>
+    <button class="md-raised">Exit</button>
+  </div>
+</div>-->
 
+
+<div *ngFor="let button of buttons" id="grid" style="display: flex">
+  <div (click)="buttonClicked(button)">{{button.text}}</div>
+
+
+</div>
 
 <!--The content below is only a placeholder and can be replaced.-->
 <!-- <div style="text-align:center">
@@ -22,4 +36,3 @@
     <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
   </li>
 </ul> -->
-

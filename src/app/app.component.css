@@ -1,0 +1,29 @@
+.md-raised:not([disabled]) {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  font-size: large;
+  margin: 20px;
+}
+
+/*.md-button:not([disabled]):hover {
+  background-image: ;
+}*/
+
+.gridListdemoBasicUsage md-grid-list {
+  margin: 8px;
+}
+
+#grid {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-around;
+}
+
+  #grid > div {
+    display: block;
+    flex: 1 0 auto;
+    height: 25px;
+    margin: 10px;
+    background-color: red;
+    text-align: center;
+    cursor: default !important;
+  }
