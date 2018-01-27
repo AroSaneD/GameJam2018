@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewChecked {
 
   title = 'app';
 
-  selectedCards: Observable<Card[]>;
+  selectedCards: Card[] = [];
   availableCards: Observable<Card[]>;
 
   shouldSendCards: Observable<boolean> = Observable.create();
@@ -25,6 +25,12 @@ export class AppComponent implements AfterViewChecked {
 
   startRound(): void {
     this.availableCards = this.socketService.getCardsForRound(16);
+    this.availableCards.subscribe(item => {
+      this.selectedCards.push(item[1]);
+      this.selectedCards.push(item[4]);
+      this.selectedCards.push(item[5]);
+      this.selectedCards.push(new Card('test', null, null, null, true, null));
+    });
   }
 
 

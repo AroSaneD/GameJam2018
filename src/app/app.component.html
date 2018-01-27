@@ -19,7 +19,7 @@
 
 <div class="game-wrapper">
   <div class="player-holder">
-    <h2>PLAYERS: </h2>
+    <h2>Players: </h2>
     <div class="player"></div>
     <div class="player"></div>
     <div class="player"></div>
@@ -27,14 +27,14 @@
 
   <div class="right-part-wrapper">
     <div class="grid-holder">
-    <div id="grid">
+    <div class="grid">
       <div *ngFor="let button of availableCards | async">
         <div (click)="buttonClicked(button)">{{button.text}}</div>
       </div>
     </div>
   </div>
-    <div class="selected-cards-holder">
-        <div *ngFor="let button of selectedCards | async">
+    <div class="selected-cards-holder grid">
+        <div *ngFor="let button of selectedCards">
             <div (click)="buttonClicked(button)">{{button.text}}</div>
           </div>
     </div>
