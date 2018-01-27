@@ -17,8 +17,33 @@
 }
 
 .game-wrapper {
-  background: linear-gradient(to left, #355c7d, #c06c84, #f8b195);
   height: 500px;
+  display: flex;
+}
+
+.player-holder {
+  flex: 0 1 auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-holder>.player {
+  display: block;
+  content: "";
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  background-color: red;
+}
+
+.right-part-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, #fad0b8, #de88a3, #655989, #7a9db0);
 }
 
 #grid {
@@ -26,6 +51,7 @@
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+  flex: 1 0 auto;
 }
 
 #grid>div {
@@ -34,7 +60,6 @@
   text-align: center;
   cursor: default !important;
   flex-basis: 25%;
-
 }
 
 #grid>div>div {
@@ -44,4 +69,12 @@
   height: 75px;
   border-radius: 75px;
   display: inline-block;
+}
+
+.selected-cards-holder {
+  border: 3px solid white;
+  border-left: none;
+  border-right: none;
+  flex: 0 1 auto;
+  flex-basis: 100px;
 }
