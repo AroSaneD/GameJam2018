@@ -11,12 +11,11 @@
 </div>-->
 <div class="game-wrapper">
 
-<div id="grid">
-  <div *ngFor="let button of selectedCards | async">
-    <div (click)="buttonClicked(button)">{{button.text}}</div>
+  <div id="grid">
+    <div *ngFor="let button of selectedCards | async">
+      <div (click)="buttonClicked(button)">{{button.text}}</div>
+    </div>
   </div>
-</div>
-
 
 </div>
 <!--The content below is only a placeholder and can be replaced.-->
