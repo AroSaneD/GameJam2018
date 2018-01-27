@@ -5,12 +5,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpModule } from '@angular/http';
 import { AchievementComponent } from './components/achievement/achievement.component';
+import { SequenceValidatorComponent } from './components/sequence-validator/sequence-validator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    AchievementComponent
+    AchievementComponent,
+    SequenceValidatorComponent
   ],
   imports: [
     BrowserModule,

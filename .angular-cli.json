@@ -18,7 +18,7 @@
         { "glob": "REEEEE.png", "input": "./", "output": "./assets/" },
         { "glob": "WRYYYYYY.png", "input": "./", "output": "./assets/" },
         { "glob": "CHINA.png", "input": "./", "output": "./assets/" },
-        { "glob": "Adutering.png", "input": "./", "output": "./assets/" },
+        { "glob": "Adutering.png", "input": "./", "output": "./assets/" }
       ],
       "index": "index.html",
       "main": "main.ts",

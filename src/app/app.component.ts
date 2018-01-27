@@ -1,8 +1,10 @@
+import { OpponentResponse } from './model/ai/opponentResponse';
 import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as $ from "jquery";
+import { TurnModel } from './model/ai/turnModel';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +23,9 @@ export class AppComponent {
   shouldSendCards: Observable<boolean> = Observable.create();
 
   shouldShowAchievement = false;
+
+  showSequenceSelection = true;
+
   public currentRound = 1;
 
   startRound(previousSequence: Card[]): void {
@@ -38,6 +43,10 @@ export class AppComponent {
 
   constructor(private socketService: MockSocketService) {
     this.startRound(null);
+
+    // Init turn model
+    TurnModel.app = this;
+    TurnModel.socketService = this.socketService;
   }
 
   buttonClicked(button: Card, buttonIndex: number): void {
@@ -56,7 +65,16 @@ export class AppComponent {
     });
 
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
-      // todo send these cards to the next opponent
+      // todo: play card send animation
+      this.showSequenceSelection = false;
+      let opponentResponse: OpponentResponse = null;
+      do {
+        opponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
+        // todo: play the animations showing the opponents guesses and "wait" for him to submit another one
+      } while (!opponentResponse.isPlayerTurn)
+
+      this.currentRound++;
+      this.startRound(opponentResponse.nextSequence);
     }
 
   }
