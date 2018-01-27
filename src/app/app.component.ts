@@ -24,8 +24,7 @@ export class AppComponent implements AfterViewChecked {
   public currentRound = 1;
 
   startRound(): void {
-    this.availableCards = this.socketService.getCardsForRound(5);
-
+    this.availableCards = this.socketService.getCardsForRound(16);
   }
 
 

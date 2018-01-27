@@ -10,7 +10,7 @@ export class MockSocketService {
 
     }
 
-    getCardNumberForRound(roundNr: number): number{
+    getCardNumberForRound(roundNr: number): number {
         return Math.floor((roundNr - 1) / 2);
 
     }
@@ -20,9 +20,17 @@ export class MockSocketService {
         const cardsToRetur = this.getCardNumberForRound(roundNr);
         const cardsObject = this.http.get('/assets/cards.json').map(res => {
             return res.json().map(item => {
-              return new Card(item.text, null, null, null);
+                return new Card(item.text, null, null, null);
             });
-          });
+        }).map((items: Card[]) => {
+            const toReturn: Card[] = [];
+            while (toReturn.length < cardsToRetur) {
+                const item = items[Math.floor(Math.random() * items.length)];
+                toReturn.push(item);
+            }
+
+            return toReturn;
+        });
 
         return cardsObject;
     }

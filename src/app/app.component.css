@@ -42,16 +42,23 @@
 
 .right-part-wrapper {
   display: flex;
+  /* flex: 1 0 auto; */
   flex-direction: column;
   background: linear-gradient(to right, #fad0b8, #de88a3, #655989, #7a9db0);
 }
 
+.grid-holder{
+  display: flex;
+  justify-content: flex-start;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
 #grid {
-  align-items: baseline;
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  flex: 1 0 auto;
+  flex: 0 1 auto;
 }
 
 #grid>div {

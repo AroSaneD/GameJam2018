@@ -26,13 +26,17 @@
   </div>
 
   <div class="right-part-wrapper">
+    <div class="grid-holder">
     <div id="grid">
       <div *ngFor="let button of availableCards | async">
         <div (click)="buttonClicked(button)">{{button.text}}</div>
       </div>
     </div>
+  </div>
     <div class="selected-cards-holder">
-      
+        <div *ngFor="let button of selectedCards | async">
+            <div (click)="buttonClicked(button)">{{button.text}}</div>
+          </div>
     </div>
   </div>
 
