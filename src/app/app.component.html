@@ -20,9 +20,20 @@
 <div class="game-wrapper">
   <div class="player-holder">
     <h2>Players: </h2>
-    <div class="player"></div>
-    <div class="player"></div>
-    <div class="player"></div>
+    <div class="player">
+      <img *ngIf="isPlayerPicking || isPlayerValidating" src="/assets/waiting.gif" alt="">
+      <div class="player"></div>
+      <span>
+        <span *ngIf="isPlayerPicking">Picking</span>
+        <span *ngIf="isPlayerValidating">Validating</span>
+      </span>
+    </div>
+    <div class="player">
+        <img *ngIf="isOpponentPicking || isOpponentValidating" src="/assets/waiting.gif" alt="">
+        <div class="player"></div>
+        <span *ngIf="isOpponentPicking">Picking</span>
+        <span *ngIf="isOpponentValidating">Validating</span>
+    </div>
   </div>
 
   <div class="right-part-wrapper">

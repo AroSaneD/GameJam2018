@@ -1,4 +1,3 @@
-import { AppComponent } from './../../app.component';
 import { MockSocketService } from './../../services/mockSocket.service';
 import { Card } from './../../model/card';
 import { Component, OnInit, Host } from '@angular/core';
@@ -26,8 +25,6 @@ export class SequenceValidatorComponent {
   showSequenceIntro = false;
   showSequenceSelection = false;
 
-  @Host() parent: AppComponent;
-
   constructor(public socketService: MockSocketService) { }
 
 
@@ -49,7 +46,7 @@ export class SequenceValidatorComponent {
 
     this.sequenceToValidate = [];
     let i = 0;
-    var interval = setInterval(() => {
+    const interval = setInterval(() => {
       this.sequenceToValidate.push(cards[i++])
       if (i >= cards.length) {
         clearInterval(interval);
@@ -68,7 +65,7 @@ export class SequenceValidatorComponent {
       this.cardsToSelectFrom = cardsToSelect;
 
       this.selectedCards = cardsToValidate.map(c => Card.placeholderCard);
-    })
+    });
   }
 
   public selectCard(card: Card, index: number) {

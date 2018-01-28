@@ -4,7 +4,6 @@ import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
 import { Component, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import * as $ from "jquery";
 import { TurnModel } from './model/ai/turnModel';
 
 @Component({
@@ -28,13 +27,34 @@ export class AppComponent implements AfterViewInit {
   showSequenceSelection = true;
   showSequenceValidation = false;
 
+  isPlayerPicking = true;
+  isPlayerValidating = false;
+  isOpponentPicking = false;
+  isOpponentValidating = false;
+
   public currentRound = 1;
 
-  @ViewChild("validator") validatorComponent: SequenceValidatorComponent;
+  @ViewChild('validator') validatorComponent: SequenceValidatorComponent;
+
+  setPlayerStatus(player: number, status: number) {
+    this.isPlayerPicking = false;
+    this.isPlayerValidating = false;
+    this.isOpponentPicking = false;
+    this.isOpponentValidating = false;
+
+    if (player === 0) {
+      if (status === 0) this.isPlayerPicking = true;
+      else this.isPlayerValidating = true;
+    } else {
+      if (status === 0) this.isOpponentPicking = true;
+      else this.isOpponentValidating = true;
+    }
+  }
 
   startRound(previousSequence: Card[]): void {
     this.showSequenceSelection = true;
     this.showSequenceValidation = false;
+    this.setPlayerStatus(0, 0);
 
     if (previousSequence && previousSequence.length > 0) {
       this.selectedCards = [...previousSequence, Card.placeholderCard];
@@ -58,7 +78,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.startRound(null);
-    //this.socketService.getNFirstCards(3).subscribe(cards => this.startValidation(cards));
+    // this.socketService.getNFirstCards(3).subscribe(cards => this.startValidation(cards));
   }
 
   buttonClicked(button: Card, buttonIndex: number): void {
@@ -78,6 +98,7 @@ export class AppComponent implements AfterViewInit {
     });
 
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
+      this.setPlayerStatus(1, 0);
 
       // todo: play card send animation
       let opponentResponse: OpponentResponse = null;
@@ -85,13 +106,13 @@ export class AppComponent implements AfterViewInit {
       do {
         opponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
         // todo: play the animations showing the opponents guesses and "wait" for him to submit another one
-      } while (!opponentResponse.isPlayerTurn)
+      } while (!opponentResponse.isPlayerTurn);
 
       // todo: play opponent validation and selection animations
       this.startValidation(opponentResponse.nextSequence);
 
       setTimeout(() => {
-        this.selectedCards.forEach(c => c.isSelected = false)
+        this.selectedCards.forEach(c => c.isSelected = false);
       }, 100);
       // this.startRound(opponentResponse.nextSequence);
     }
@@ -99,10 +120,14 @@ export class AppComponent implements AfterViewInit {
   }
 
   startValidation(cards: Card[]): void {
+    this.setPlayerStatus(0, 1);
+
     this.showSequenceSelection = false;
     this.showSequenceValidation = true;
 
     this.validatorComponent.validateSequnce(cards).subscribe(results => {
+      this.setPlayerStatus(0, 0);
+
       this.showSequenceSelection = true;
       this.showSequenceValidation = false;
 
