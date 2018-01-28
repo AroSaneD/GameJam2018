@@ -4,6 +4,7 @@ import { Component, OnInit, Host } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { templateJitUrl } from '@angular/compiler';
+import 'animate.css';
 
 @Component({
   selector: 'app-sequence-validator',

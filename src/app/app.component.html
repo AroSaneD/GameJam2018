@@ -56,7 +56,7 @@
 
     <div *ngIf="showSequenceSelection" class="selected-cards-holder grid">
       <div *ngFor="let button of selectedCards">
-        <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
+        <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder, 'answered-right': button.answeredCorrectly != null && button.answeredCorrectly, 'answered-wrong': button.answeredCorrectly != null && !button.answeredCorrectly}"></div>
       </div>
     </div>
   </div>

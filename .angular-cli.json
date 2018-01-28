@@ -58,7 +58,8 @@
         { "glob": "player1.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player2.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player3.jpg", "input": "./", "output": "./assets/" },
-        { "glob": "player4.jpg", "input": "./", "output": "./assets/" }
+        { "glob": "player4.jpg", "input": "./", "output": "./assets/" },
+        { "glob": "achievement-first-win.png", "input": "./", "output": "./assets/" }
       ],
       "index": "index.html",
       "main": "main.ts",

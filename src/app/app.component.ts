@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit {
 
   shouldSendCards: Observable<boolean> = Observable.create();
 
-  shouldShowAchievement = false;
+  shouldShowAchievement = true;
 
   showSequenceSelection = true;
   showSequenceValidation = false;
