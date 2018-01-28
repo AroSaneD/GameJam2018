@@ -13,8 +13,7 @@
         { "glob": "package.json", "input": "../", "output": "./assets/" },
         { "glob": "data.json", "input": "./", "output": "./assets/" },
         { "glob": "waiting.gif", "input": "./", "output": "./assets/" },
-
-        // Picture files
+        { "glob": "splash.gif", "input": "./", "output": "./assets/" },
         { "glob": "Adutering.png", "input": "./", "output": "./assets/" },
         { "glob": "NANI1.png", "input": "./", "output": "./assets/" },
         { "glob": "OniiChan.png", "input": "./", "output": "./assets/" },
@@ -22,10 +21,6 @@
         { "glob": "WRYYYYYY.png", "input": "./", "output": "./assets/" },
         { "glob": "CHINA.png", "input": "./", "output": "./assets/" },
         { "glob": "Adutering.png", "input": "./", "output": "./assets/" },
-
-        // Audio files
-
-        // Profile pictures
         { "glob": "player1.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player2.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player3.jpg", "input": "./", "output": "./assets/" },
