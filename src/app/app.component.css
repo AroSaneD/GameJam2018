@@ -67,7 +67,7 @@ h2{
   flex: 0 1 auto;
   flex-direction: column;
   background: linear-gradient(to right, #fad0b8, #de88a3, #655989, #7a9db0);
-  min-width: 750px;
+  min-width: 600px;
 }
 
 .grid-holder{

@@ -35,17 +35,17 @@ export class SequenceValidatorComponent {
     this.validationResults = cards.map(c => true);
 
     this.validationSubject = new Subject<boolean[]>();
-    
 
-     //this.startValidationIntroduction(cards);
-    this.allowUserInput(cards);
+
+    this.startValidationIntroduction(cards);
+    // this.allowUserInput(cards);
 
     return this.validationSubject;
   }
 
   public startValidationIntroduction(cards: Card[]) {
-    this.showSequenceSelection = false;
     this.showSequenceIntro = true;
+    this.showSequenceSelection = false;
 
     this.sequenceToValidate = [];
     let i = 0;
@@ -53,10 +53,11 @@ export class SequenceValidatorComponent {
       this.sequenceToValidate.push(cards[i++])
       if (i >= cards.length) {
         clearInterval(interval);
+        setTimeout(() => {
+          this.allowUserInput(cards);
+        }, 2000);
       }
     }, 1000);
-
-    this.allowUserInput(cards);
   }
 
   public allowUserInput(cardsToValidate: Card[]) {
@@ -74,7 +75,7 @@ export class SequenceValidatorComponent {
     const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
     this.selectedCards[indexOfFirstPlaceholder] = card;
 
-    if(this.sequenceToValidate[indexOfFirstPlaceholder].iconUrl !== this.selectedCards[indexOfFirstPlaceholder].iconUrl){
+    if (this.sequenceToValidate[indexOfFirstPlaceholder].iconUrl !== this.selectedCards[indexOfFirstPlaceholder].iconUrl) {
       this.validationResults[indexOfFirstPlaceholder] = false;
     }
 

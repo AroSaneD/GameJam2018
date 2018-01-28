@@ -1,4 +1,5 @@
 import { Card } from "../card";
+import { TurnModel } from "./turnModel";
 
 export class Opponent {
   currentTurn = 0;
@@ -9,8 +10,8 @@ export class Opponent {
     });
   }
 
-  nextSequence(cards: Card[]): Card[]{
-    return [...cards, new Card("test", "test", null, null)]; // todo: insert random
+  nextSequence(cards: Card[]): Card[] {
+    return [...cards, cards[Math.floor(Math.random() * cards.length)]];
   }
 
 

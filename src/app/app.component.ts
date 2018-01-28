@@ -14,7 +14,7 @@ import { TurnModel } from './model/ai/turnModel';
   providers: [MockSocketService],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent implements AfterViewInit {
 
   title = 'app';
 
@@ -48,12 +48,12 @@ export class AppComponent implements AfterViewInit{
     // this.availableCards = this.socketService.getCardsForRound(this.currentRound);
   }
 
-  constructor(private socketService: MockSocketService) {
+  constructor(public socketService: MockSocketService) {
     // Init turn model
     TurnModel.app = this;
     TurnModel.socketService = this.socketService;
 
-    
+
   }
 
   ngAfterViewInit() {
@@ -62,7 +62,7 @@ export class AppComponent implements AfterViewInit{
   }
 
   buttonClicked(button: Card, buttonIndex: number): void {
-    
+
     if (button.isSelected || this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
       return;
     }
@@ -76,21 +76,24 @@ export class AppComponent implements AfterViewInit{
       }
       return c;
     });
-    
+
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
-      
+
       // todo: play card send animation
       let opponentResponse: OpponentResponse = null;
-      
+
       do {
         opponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
         // todo: play the animations showing the opponents guesses and "wait" for him to submit another one
       } while (!opponentResponse.isPlayerTurn)
 
-      this.currentRound++;
       // todo: play opponent validation and selection animations
-      //this.startValidation(opponentResponse.nextSequence);
-      this.startRound(opponentResponse.nextSequence);
+      this.startValidation(opponentResponse.nextSequence);
+
+      setTimeout(() => {
+        this.selectedCards.forEach(c => c.isSelected = false)
+      }, 100);
+      // this.startRound(opponentResponse.nextSequence);
     }
 
   }
@@ -99,9 +102,11 @@ export class AppComponent implements AfterViewInit{
     this.showSequenceSelection = false;
     this.showSequenceValidation = true;
 
-    this.validatorComponent.validateSequnce(cards).subscribe(results =>{
+    this.validatorComponent.validateSequnce(cards).subscribe(results => {
       this.showSequenceSelection = true;
-    this.showSequenceValidation = false;
+      this.showSequenceValidation = false;
+
+      this.startRound(cards);
     });
   }
 

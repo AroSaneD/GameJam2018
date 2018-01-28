@@ -27,7 +27,7 @@
 
   <div class="right-part-wrapper">
 
-    <app-sequence-validator *ngIf="showSequenceValidation" #validator style="flex-grow: 1; position: relative;"></app-sequence-validator>
+    <app-sequence-validator [hidden]="!showSequenceValidation" #validator style="flex-grow: 1; position: relative;"></app-sequence-validator>
 
     <div *ngIf="showSequenceSelection" class="grid-holder">
       <div class="grid">
