@@ -3,9 +3,9 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\components",
-    "\\src\\app\\components\\achievement"
+    "\\src\\app\\model",
+    "\\src\\app\\model\\ai"
   ],
-  "SelectedNode": "\\src\\app\\components\\achievement\\achievement.component.css",
+  "SelectedNode": "\\src\\app\\model\\ai\\opponent.ts",
   "PreviewInSolutionExplorer": false
 }
