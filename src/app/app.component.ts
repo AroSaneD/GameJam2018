@@ -23,7 +23,7 @@ export class AppComponent implements AfterViewInit {
 
   shouldSendCards: Observable<boolean> = Observable.create();
 
-  shouldShowAchievement = true;
+  shouldShowAchievement = false;
 
   showSequenceSelection = true;
   showSequenceValidation = false;
@@ -133,9 +133,9 @@ export class AppComponent implements AfterViewInit {
       setTimeout(() => {
         setTimeout(() => {
           this.selectedCards.forEach(c => c.isSelected = false);
-        }, 100);
+        }, 1000);
         this.startValidation(opponentResponse.nextSequence);
-      }, (Math.random() * 200) + 200);
+      }, (Math.random() * 1000) + 1000);
       return;
     }
 
@@ -143,7 +143,10 @@ export class AppComponent implements AfterViewInit {
       console.log('Guessing');
       this.selectedCards[currentAction].answeredCorrectly = opponentResponse.matches[currentAction];
       this.displayOpponentsActions(opponentResponse, currentAction + 1);
-    }, (Math.random() * 500) + 100);
+      if (this.selectedCards.filter(c => c.answeredCorrectly !== null && !c.answeredCorrectly).length > 2) {
+        this.shouldShowAchievement = true;
+      }
+    }, (Math.random() * 200) + 1000);
   }
 
 

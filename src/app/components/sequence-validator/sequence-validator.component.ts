@@ -48,7 +48,7 @@ export class SequenceValidatorComponent {
     this.sequenceToValidate = [];
     let i = 0;
     const interval = setInterval(() => {
-      var audio = new Audio(cards[i].soundUrl);
+      const audio = new Audio(cards[i].soundUrl);
       audio.play();
       this.sequenceToValidate.push(cards[i++])
       if (i >= cards.length) {
@@ -75,16 +75,17 @@ export class SequenceValidatorComponent {
     const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
     this.selectedCards[indexOfFirstPlaceholder] = card;
 
-    var audio = new Audio(card.soundUrl);
+    const audio = new Audio(card.soundUrl);
     audio.play();
 
     if (this.sequenceToValidate[indexOfFirstPlaceholder].iconUrl !== this.selectedCards[indexOfFirstPlaceholder].iconUrl) {
       this.validationResults[indexOfFirstPlaceholder] = false;
+      this.selectedCards[indexOfFirstPlaceholder].answeredCorrectly = false;
     }
 
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
-      // Todo: play some sort of animation before heading back to the parent
       this.validationSubject.next(this.validationResults);
+      this.selectedCards.forEach(c => c.answeredCorrectly = null);
     }
   }
 

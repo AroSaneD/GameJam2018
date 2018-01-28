@@ -7,7 +7,7 @@ export class Opponent {
 
   matchCards(cards: Card[]): boolean[] {
     return cards.map((c, i) => {
-      return Math.random() < 1 - 0.05 * i;
+      return Math.random() < 1 - 1 * (i + 1);
     });
   }
 
