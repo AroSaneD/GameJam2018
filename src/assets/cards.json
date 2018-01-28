@@ -16,8 +16,9 @@
     {"path":"LookAtMahHands.png", "audioPath":"smolHands.mp3"},
     {"path":"Muttons.png", "audioPath":"muffinbuttons.mp3"},
     {"path":"NANI.png", "audioPath":"nani.mp3"},
-    {"path":"ORA ORA ORA.png", "audioPath":"oraora.mp3"},
+    {"path":"ORAORAORA.png", "audioPath":"oraora.mp3"},
     {"path":"PAPAFRANK.png", "audioPath":"timeToStop.mp3"},
     {"path":"ICANTGETUPP.png", "audioPath":"cantgetup.mp3"},
-    {"path":"THEWOOOOOORLD.png", "audioPath":"zawarudo.mp3"}
+    {"path":"THEWOOOOOORLD.png", "audioPath":"zawarudo.mp3"},
+    {"path":"SOMEBODY_TOUCHA_MY_SPAGHET.png", "audioPath":"spaghet.mp3"}
 ]
