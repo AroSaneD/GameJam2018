@@ -44,7 +44,7 @@ export class TurnModel {
         this.currentOpponent.currentTurn++;
 
         const nextOpponent = this.opponents[this.opponents.indexOf(this.currentOpponent) % this.opponents.length];
-        const isNewOpponent = nextOpponent == this.currentOpponent;
+        const isNewOpponent = nextOpponent != this.currentOpponent;
 
         this.currentOpponent = nextOpponent;
 

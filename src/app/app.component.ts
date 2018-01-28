@@ -25,21 +25,24 @@ export class AppComponent implements AfterViewInit{
 
   shouldShowAchievement = false;
 
-  showSequenceSelection = false;
-  showSequenceValidation = true;
+  showSequenceSelection = true;
+  showSequenceValidation = false;
 
   public currentRound = 1;
 
   @ViewChild("validator") validatorComponent: SequenceValidatorComponent;
 
   startRound(previousSequence: Card[]): void {
+    this.showSequenceSelection = true;
+    this.showSequenceValidation = false;
+
     if (previousSequence && previousSequence.length > 0) {
       this.selectedCards = [...previousSequence, Card.placeholderCard];
     } else {
       this.selectedCards = [Card.placeholderCard, Card.placeholderCard];
     }
 
-    const obs = this.socketService.getCardsForRound(this.currentRound);
+    const obs = this.socketService.getCardsForRound(this.currentRound++);
     obs.subscribe(cards => this.availableCards = cards);
 
     // this.availableCards = this.socketService.getCardsForRound(this.currentRound);
@@ -54,11 +57,12 @@ export class AppComponent implements AfterViewInit{
   }
 
   ngAfterViewInit() {
-    //this.startRound(null);
-    this.socketService.getNFirstCards(3).subscribe(cards => this.startValidation(cards));
+    this.startRound(null);
+    //this.socketService.getNFirstCards(3).subscribe(cards => this.startValidation(cards));
   }
 
   buttonClicked(button: Card, buttonIndex: number): void {
+    
     if (button.isSelected || this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
       return;
     }
@@ -72,17 +76,20 @@ export class AppComponent implements AfterViewInit{
       }
       return c;
     });
-
+    
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
+      
       // todo: play card send animation
-      this.showSequenceSelection = false;
       let opponentResponse: OpponentResponse = null;
+      
       do {
         opponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
         // todo: play the animations showing the opponents guesses and "wait" for him to submit another one
       } while (!opponentResponse.isPlayerTurn)
 
       this.currentRound++;
+      // todo: play opponent validation and selection animations
+      //this.startValidation(opponentResponse.nextSequence);
       this.startRound(opponentResponse.nextSequence);
     }
 
@@ -92,7 +99,10 @@ export class AppComponent implements AfterViewInit{
     this.showSequenceSelection = false;
     this.showSequenceValidation = true;
 
-    this.validatorComponent.validateSequnce(cards);
+    this.validatorComponent.validateSequnce(cards).subscribe(results =>{
+      this.showSequenceSelection = true;
+    this.showSequenceValidation = false;
+    });
   }
 
 }

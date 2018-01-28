@@ -19,6 +19,6 @@
 
 <div class="selected-cards-holder grid">
   <div *ngFor="let button of selectedCards">
-    <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
+    <div [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
   </div>
 </div>

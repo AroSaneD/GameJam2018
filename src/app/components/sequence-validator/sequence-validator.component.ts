@@ -1,6 +1,7 @@
+import { AppComponent } from './../../app.component';
 import { MockSocketService } from './../../services/mockSocket.service';
 import { Card } from './../../model/card';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Host } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { templateJitUrl } from '@angular/compiler';
@@ -13,8 +14,8 @@ import { templateJitUrl } from '@angular/compiler';
 })
 export class SequenceValidatorComponent {
 
-  validationSubject: Subject<boolean>;
-
+  validationSubject: Subject<boolean[]>;
+  validationResults: boolean[];
 
   sequenceToValidate: Card[];
   cardsToSelectFrom: Card[];
@@ -25,12 +26,16 @@ export class SequenceValidatorComponent {
   showSequenceIntro = false;
   showSequenceSelection = false;
 
+  @Host() parent: AppComponent;
+
   constructor(public socketService: MockSocketService) { }
 
 
-  public validateSequnce(cards: Card[]): Observable<boolean> {
-    this.validationSubject = new Subject();
-    this.validationSubject.next(false);
+  public validateSequnce(cards: Card[]): Observable<boolean[]> {
+    this.validationResults = cards.map(c => true);
+
+    this.validationSubject = new Subject<boolean[]>();
+    
 
      //this.startValidationIntroduction(cards);
     this.allowUserInput(cards);
@@ -51,7 +56,7 @@ export class SequenceValidatorComponent {
       }
     }, 1000);
 
-    // this.sequenceToValidate = cards;
+    this.allowUserInput(cards);
   }
 
   public allowUserInput(cardsToValidate: Card[]) {
@@ -66,7 +71,17 @@ export class SequenceValidatorComponent {
   }
 
   public selectCard(card: Card, index: number) {
+    const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
+    this.selectedCards[indexOfFirstPlaceholder] = card;
 
+    if(this.sequenceToValidate[indexOfFirstPlaceholder].iconUrl !== this.selectedCards[indexOfFirstPlaceholder].iconUrl){
+      this.validationResults[indexOfFirstPlaceholder] = false;
+    }
+
+    if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
+      // Todo: play some sort of animation before heading back to the parent
+      this.validationSubject.next(this.validationResults);
+    }
   }
 
 }

@@ -64,9 +64,10 @@ h2{
 
 .right-part-wrapper {
   display: flex;
-  flex: 1 0 auto;
+  flex: 0 1 auto;
   flex-direction: column;
   background: linear-gradient(to right, #fad0b8, #de88a3, #655989, #7a9db0);
+  min-width: 750px;
 }
 
 .grid-holder{
@@ -81,6 +82,7 @@ h2{
   justify-content: flex-start;
   flex-wrap: wrap;
   flex: 0 1 auto;
+  /* width: 950px; */
 }
 
 .grid>div {
@@ -116,4 +118,21 @@ h2{
   border-right: none;
   flex: 0 1 auto;
   flex-basis: 100px;
+  flex-wrap: nowrap;
+  flex-basis: unset;
+}
+
+.selected-cards-holder {
+  border: 3px solid white;
+  border-left: none;
+  border-right: none;
+  flex: 0 1 auto;
+  flex-basis: 100px;
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  /* width: 950px; */
+}
+.selected-cards-holder > div {
+  flex-basis: unset;
 }
