@@ -5,6 +5,7 @@ import { Card } from './model/card';
 import { Component, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { TurnModel } from './model/ai/turnModel';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
@@ -98,26 +99,44 @@ export class AppComponent implements AfterViewInit {
     });
 
     if (this.selectedCards.filter(c => c.isPlaceHolder).length < 1) {
-      this.setPlayerStatus(1, 0);
-
-      // todo: play card send animation
-      let opponentResponse: OpponentResponse = null;
-
-      do {
-        opponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
-        // todo: play the animations showing the opponents guesses and "wait" for him to submit another one
-      } while (!opponentResponse.isPlayerTurn);
-
-      // todo: play opponent validation and selection animations
-      this.startValidation(opponentResponse.nextSequence);
-
-      setTimeout(() => {
-        this.selectedCards.forEach(c => c.isSelected = false);
-      }, 100);
-      // this.startRound(opponentResponse.nextSequence);
+      this.startOpponentTurn();
     }
 
   }
+
+  startOpponentTurn(): Observable<any> {
+    const subject = new Subject();
+    this.setPlayerStatus(1, 0);
+
+    // todo: play card send animation
+    const opponentResponse: OpponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
+    this.displayOpponentsActions(opponentResponse);
+
+    // this.startRound(opponentResponse.nextSequence);
+
+    return subject;
+  }
+
+
+  displayOpponentsActions(opponentResponse: OpponentResponse, currentAction: number = 0): void {
+    if (currentAction >= opponentResponse.matches.length) {
+      this.selectedCards.forEach(c => c.answeredCorrectly = null);
+      setTimeout(() => {
+        setTimeout(() => {
+          this.selectedCards.forEach(c => c.isSelected = false);
+        }, 100);
+        this.startValidation(opponentResponse.nextSequence);
+      }, 200);
+      return;
+    }
+
+    setTimeout(() => {
+      console.log('Guessing');
+      this.selectedCards[currentAction].answeredCorrectly = opponentResponse.matches[currentAction];
+      this.displayOpponentsActions(opponentResponse, currentAction + 1);
+    }, (Math.random() * 500) + 100);
+  }
+
 
   startValidation(cards: Card[]): void {
     this.setPlayerStatus(0, 1);

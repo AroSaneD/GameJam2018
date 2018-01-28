@@ -16,6 +16,7 @@ export class Card {
     }
 
     public isSelected = false;
+    public answeredCorrectly?: boolean;
 
     constructor(
         public text: string,
