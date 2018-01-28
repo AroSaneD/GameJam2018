@@ -48,6 +48,8 @@ export class SequenceValidatorComponent {
     this.sequenceToValidate = [];
     let i = 0;
     const interval = setInterval(() => {
+      var audio = new Audio(cards[i].soundUrl);
+      audio.play();
       this.sequenceToValidate.push(cards[i++])
       if (i >= cards.length) {
         clearInterval(interval);
@@ -72,6 +74,9 @@ export class SequenceValidatorComponent {
   public selectCard(card: Card, index: number) {
     const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
     this.selectedCards[indexOfFirstPlaceholder] = card;
+
+    var audio = new Audio(card.soundUrl);
+    audio.play();
 
     if (this.sequenceToValidate[indexOfFirstPlaceholder].iconUrl !== this.selectedCards[indexOfFirstPlaceholder].iconUrl) {
       this.validationResults[indexOfFirstPlaceholder] = false;

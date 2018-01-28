@@ -17,7 +17,7 @@ export class MockSocketService {
     getCards(): Observable<Card[]> {
         return this.http.get('/assets/cards.json').map(res => {
             return res.json().map(item => {
-                return new Card(item.text, item.path ? '/assets/' + item.path : null, null, null);
+              return new Card(item.text, item.path ? '/assets/' + item.path : null, item.audioPath ? '/assets/' + item.audioPath : null, null);
             });
         });
     }

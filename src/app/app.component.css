@@ -119,16 +119,17 @@ h2{
   flex-basis: 25%;
 }
 
-.grid>div>div {
-  margin: 10px;
-  background-color: white;
-  width: 75px;
-  height: 75px;
-  border-radius: 75px;
-  display: inline-block;
-  background-position: center;
-  background-size: contain;
-}
+  .grid > div > div {
+    margin: 10px;
+    background-color: white;
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+    display: inline-block;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 
 .grid>div>div.selected{
   opacity: 0.3;

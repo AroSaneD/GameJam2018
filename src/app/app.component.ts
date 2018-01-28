@@ -88,6 +88,11 @@ export class AppComponent implements AfterViewInit {
       return;
     }
 
+    //play sound
+    console.log("playing");
+    var audio = new Audio(button.soundUrl);
+    audio.play();
+
     const indexOfFirstPlaceholder = this.selectedCards.findIndex(c => c.isPlaceHolder);
     this.selectedCards[indexOfFirstPlaceholder] = button;
 
