@@ -11,7 +11,7 @@ export class Opponent {
     });
   }
 
-  nextSequence(cards: Card[]): Observable<Card[] {
+  nextSequence(cards: Card[]): Observable<Card[]> {
     return TurnModel.socketService.getRandomCard().map(card => [...cards, card]);
   }
 
