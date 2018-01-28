@@ -23,7 +23,7 @@ export class MockSocketService {
     }
 
     getRandomCard(): Observable<Card> {
-        return this.getCards().map(cards => {
+        return this.getCards().map(cards => cards.filter(c => c.iconUrl)).map(cards => {
             return this.getRandomElementFromArray(cards);
         });
     }
@@ -67,9 +67,9 @@ export class MockSocketService {
         const cardsObject = this.getCards().map((items: Card[]) => {
             const toReturn: Card[] = [...cards];
             const returnNr = cards.length + 3;
-            
+
             const unusedCards = items.filter(c => toReturn.find(c1 => c.iconUrl == c1.iconUrl) == null);
-            
+
             while (toReturn.length < returnNr) {
                 const item = this.getRandomElementFromArray(unusedCards);
                 if (item.iconUrl && (toReturn.findIndex(c => c.iconUrl == item.iconUrl) === -1)) {

@@ -109,8 +109,11 @@ export class AppComponent implements AfterViewInit {
     this.setPlayerStatus(1, 0);
 
     // todo: play card send animation
-    const opponentResponse: OpponentResponse = TurnModel.Instance.sendSequenceToOpponent(this.selectedCards);
-    this.displayOpponentsActions(opponentResponse);
+    // const opponentResponse: OpponentResponse =
+    TurnModel.Instance.sendSequenceToOpponent(this.selectedCards).subscribe(opponentResponse => {
+      this.displayOpponentsActions(opponentResponse);
+    });
+
 
     // this.startRound(opponentResponse.nextSequence);
 
@@ -121,12 +124,13 @@ export class AppComponent implements AfterViewInit {
   displayOpponentsActions(opponentResponse: OpponentResponse, currentAction: number = 0): void {
     if (currentAction >= opponentResponse.matches.length) {
       this.selectedCards.forEach(c => c.answeredCorrectly = null);
+      this.setPlayerStatus(1, 1);
       setTimeout(() => {
         setTimeout(() => {
           this.selectedCards.forEach(c => c.isSelected = false);
         }, 100);
         this.startValidation(opponentResponse.nextSequence);
-      }, 200);
+      }, (Math.random() * 200) + 200);
       return;
     }
 

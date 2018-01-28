@@ -37,18 +37,20 @@ export class TurnModel {
     }
 
 
-    public sendSequenceToOpponent(cards: Card[]): OpponentResponse {
-        const matches = this.currentOpponent.matchCards(cards);
-        const nextSeq = this.currentOpponent.nextSequence(cards);
+    public sendSequenceToOpponent(cards: Card[]): Observable<OpponentResponse> {
+        return this.currentOpponent.nextSequence(cards).map(nextSeq => {
+            const matches = this.currentOpponent.matchCards(cards);
+            // const nextSeq = this.currentOpponent.nextSequence(cards);
 
-        this.currentOpponent.currentTurn++;
+            this.currentOpponent.currentTurn++;
 
-        const nextOpponent = this.opponents[this.opponents.indexOf(this.currentOpponent) % this.opponents.length];
-        const isNewOpponent = nextOpponent != this.currentOpponent;
+            const nextOpponent = this.opponents[this.opponents.indexOf(this.currentOpponent) % this.opponents.length];
+            const isNewOpponent = nextOpponent !== this.currentOpponent;
 
-        this.currentOpponent = nextOpponent;
+            this.currentOpponent = nextOpponent;
 
-        return new OpponentResponse(matches, nextSeq, !isNewOpponent); // if the opponent is the same, then it's the players turn
+            return new OpponentResponse(matches, nextSeq, !isNewOpponent); // if the opponent is the same, then it's the players turn
+        });
     }
 
 }

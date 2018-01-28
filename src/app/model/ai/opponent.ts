@@ -1,5 +1,6 @@
-import { Card } from "../card";
-import { TurnModel } from "./turnModel";
+import { Card } from '../card';
+import { TurnModel } from './turnModel';
+import { Observable } from 'rxjs/Observable';
 
 export class Opponent {
   currentTurn = 0;
@@ -10,8 +11,8 @@ export class Opponent {
     });
   }
 
-  nextSequence(cards: Card[]): Card[] {
-    return [...cards, cards[Math.floor(Math.random() * cards.length)]];
+  nextSequence(cards: Card[]): Observable<Card[] {
+    return TurnModel.socketService.getRandomCard().map(card => [...cards, card]);
   }
 
 
