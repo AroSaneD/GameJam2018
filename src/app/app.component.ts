@@ -92,7 +92,7 @@ export class AppComponent implements AfterViewInit{
     this.showSequenceSelection = false;
     this.showSequenceValidation = true;
 
-    this.validatorComponent.startValidationIntroduction(cards);
+    this.validatorComponent.validateSequnce(cards);
   }
 
 }

@@ -38,3 +38,15 @@
   .grid>div>div.placeholder{
     background-color: #acacac;
   }
+
+  .selected-cards-holder {
+    border: 3px solid white;
+    border-left: none;
+    border-right: none;
+    flex: 0 1 auto;
+    flex-basis: 100px;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+  }
+  

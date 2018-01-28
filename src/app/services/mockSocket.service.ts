@@ -66,10 +66,13 @@ export class MockSocketService {
     getUniqueCardsAndSomeMore(cards: Card[]): Observable<Card[]> {
         const cardsObject = this.getCards().map((items: Card[]) => {
             const toReturn: Card[] = [...cards];
-            const returnNr = cards.length + 4;
+            const returnNr = cards.length + 3;
+            
+            const unusedCards = items.filter(c => toReturn.find(c1 => c.iconUrl == c1.iconUrl) == null);
+            
             while (toReturn.length < returnNr) {
-                const item = this.getRandomElementFromArray(items);
-                if (item.iconUrl && !toReturn.findIndex(c => c.iconUrl == item.iconUrl)) {
+                const item = this.getRandomElementFromArray(unusedCards);
+                if (item.iconUrl && (toReturn.findIndex(c => c.iconUrl == item.iconUrl) === -1)) {
                     toReturn.push(Object.assign({}, item));
                 }
             }

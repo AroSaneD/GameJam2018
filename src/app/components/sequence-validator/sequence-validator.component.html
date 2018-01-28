@@ -1,7 +1,24 @@
-<div class="grid-holder">
+<div *ngIf="showSequenceIntro" class="grid-holder">
   <div class="grid">
     <div *ngFor="let button of sequenceToValidate; let i = index">
-      <div (click)="buttonClicked(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
+      <div [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
     </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="showSequenceSelection" class="grid-holder">
+  <div class="grid">
+    <div *ngFor="let button of cardsToSelectFrom; let i = index">
+      <div (click)="selectCard(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="selected-cards-holder grid">
+  <div *ngFor="let button of selectedCards">
+    <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
   </div>
 </div>
