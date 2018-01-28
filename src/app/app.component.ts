@@ -1,7 +1,8 @@
+import { SequenceValidatorComponent } from './components/sequence-validator/sequence-validator.component';
 import { OpponentResponse } from './model/ai/opponentResponse';
 import { MockSocketService } from './services/mockSocket.service';
 import { Card } from './model/card';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as $ from "jquery";
 import { TurnModel } from './model/ai/turnModel';
@@ -13,7 +14,7 @@ import { TurnModel } from './model/ai/turnModel';
   providers: [MockSocketService],
   encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit{
 
   title = 'app';
 
@@ -24,9 +25,12 @@ export class AppComponent {
 
   shouldShowAchievement = false;
 
-  showSequenceSelection = true;
+  showSequenceSelection = false;
+  showSequenceValidation = true;
 
   public currentRound = 1;
+
+  @ViewChild("validator") validatorComponent: SequenceValidatorComponent;
 
   startRound(previousSequence: Card[]): void {
     if (previousSequence && previousSequence.length > 0) {
@@ -42,11 +46,16 @@ export class AppComponent {
   }
 
   constructor(private socketService: MockSocketService) {
-    this.startRound(null);
-
     // Init turn model
     TurnModel.app = this;
     TurnModel.socketService = this.socketService;
+
+    
+  }
+
+  ngAfterViewInit() {
+    //this.startRound(null);
+    this.socketService.getNFirstCards(3).subscribe(cards => this.startValidation(cards));
   }
 
   buttonClicked(button: Card, buttonIndex: number): void {
@@ -77,6 +86,13 @@ export class AppComponent {
       this.startRound(opponentResponse.nextSequence);
     }
 
+  }
+
+  startValidation(cards: Card[]): void {
+    this.showSequenceSelection = false;
+    this.showSequenceValidation = true;
+
+    this.validatorComponent.startValidationIntroduction(cards);
   }
 
 }

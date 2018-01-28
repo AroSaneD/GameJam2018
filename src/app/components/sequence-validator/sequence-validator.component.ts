@@ -26,7 +26,16 @@ export class SequenceValidatorComponent{
   }
 
   public startValidationIntroduction(cards: Card[]){
-    this.sequenceToValidate = cards;
+    this.sequenceToValidate = [];
+    let i =0;
+    var interval = setInterval(()=>{
+      this.sequenceToValidate.push(cards[i++])
+      if(i>= cards.length){
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    // this.sequenceToValidate = cards;
   }
 
 }

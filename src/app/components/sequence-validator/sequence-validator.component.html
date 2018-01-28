@@ -1,3 +1,7 @@
-<p>
-  sequence-validator works!
-</p>
+<div class="grid-holder">
+  <div class="grid">
+    <div *ngFor="let button of sequenceToValidate; let i = index">
+      <div (click)="buttonClicked(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
+    </div>
+  </div>
+</div>

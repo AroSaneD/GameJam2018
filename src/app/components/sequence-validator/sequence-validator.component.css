@@ -1,0 +1,40 @@
+.grid-holder{
+    display: flex;
+    justify-content: flex-start;
+    flex: 1 0 auto;
+    flex-direction: column;
+  }
+  
+  .grid {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+  }
+  
+  .grid>div {
+    display: block;
+    flex: 0 0 auto;
+    text-align: center;
+    cursor: default !important;
+    flex-basis: 25%;
+  }
+  
+  .grid>div>div {
+    margin: 10px;
+    background-color: white;
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+    display: inline-block;
+    background-position: center;
+    background-size: contain;
+  }
+  
+  .grid>div>div.selected{
+    opacity: 0.3;
+  }
+  
+  .grid>div>div.placeholder{
+    background-color: #acacac;
+  }

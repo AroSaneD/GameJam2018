@@ -26,17 +26,18 @@
   </div>
 
   <div class="right-part-wrapper">
-    <div class="grid-holder">
-    <div class="grid">
-      <div *ngFor="let button of availableCards; let i = index">
-        <div (click)="buttonClicked(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
+    <app-sequence-validator *ngIf="showSequenceValidation" #validator style="flex-grow: 1"></app-sequence-validator>
+    <div *ngIf="showSequenceSelection" class="grid-holder">
+      <div class="grid">
+        <div *ngFor="let button of availableCards; let i = index">
+          <div (click)="buttonClicked(button, i)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'selected': button.isSelected}"></div>
+        </div>
       </div>
     </div>
-  </div>
     <div class="selected-cards-holder grid">
-        <div *ngFor="let button of selectedCards">
-            <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
-          </div>
+      <div *ngFor="let button of selectedCards">
+        <div (click)="buttonClicked(button)" [ngStyle]="{'background-image': 'url(' + button.iconUrl + ')'}" [ngClass]="{'placeholder': button.isPlaceHolder}"></div>
+      </div>
     </div>
   </div>
 

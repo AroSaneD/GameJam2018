@@ -49,4 +49,34 @@ export class MockSocketService {
 
         return cardsObject;
     }
+
+    getNFirstCards(n: number): Observable<Card[]> {
+        const cardsObject = this.getCards().map((items: Card[]) => {
+            const toReturn: Card[] = [];
+            for (let i = 0; i < n; i++) {
+                toReturn.push(Object.assign({}, items[i]));
+            }
+
+            return toReturn;
+        });
+
+        return cardsObject;
+    }
+
+    getUniqueCardsAndSomeMore(cards: Card[]): Observable<Card[]> {
+        const cardsObject = this.getCards().map((items: Card[]) => {
+            const toReturn: Card[] = [...cards];
+            const returnNr = cards.length + 4;
+            while (toReturn.length < returnNr) {
+                const item = this.getRandomElementFromArray(items);
+                if (item.iconUrl && !toReturn.findIndex(c => c.iconUrl == item.iconUrl)) {
+                    toReturn.push(Object.assign({}, item));
+                }
+            }
+
+            return toReturn;
+        });
+
+        return cardsObject;
+    }
 }
