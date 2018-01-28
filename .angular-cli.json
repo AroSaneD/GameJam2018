@@ -13,8 +13,7 @@
         { "glob": "package.json", "input": "../", "output": "./assets/" },
         { "glob": "data.json", "input": "./", "output": "./assets/" },
         { "glob": "waiting.gif", "input": "./", "output": "./assets/" },
-
-        // Picture files
+        { "glob": "splash.gif", "input": "./", "output": "./assets/" },
         { "glob": "Adutering.png", "input": "./", "output": "./assets/" },
         { "glob": "NANI1.png", "input": "./", "output": "./assets/" },
         { "glob": "OniiChan.png", "input": "./", "output": "./assets/" },
@@ -35,9 +34,7 @@
 		{ "glob": "PAPAFRANK.png", "input": "./", "output": "./assets/" },
 		{ "glob": "ICANTGETUPP.png", "input": "./", "output": "./assets/" },
 		{ "glob": "THEWOOOOOORLD.png", "input": "./", "output": "./assets/" },
-		{ "glob": "HUMANITYLOST.png", "input": "./", "output": "./assets/" }
-
-        // Audio files
+		{ "glob": "HUMANITYLOST.png", "input": "./", "output": "./assets/" },
 		{ "glob": "ineedadult.mp3", "input": "./", "output": "./assets/" },
 		{ "glob": "nani.mp", "input": "./", "output": "./assets/" },
 		{ "glob": "oniichan.mp3", "input": "./", "output": "./assets/" },
@@ -57,9 +54,7 @@
 		{ "glob": "oraora.mp3", "input": "./", "output": "./assets/" },
 		{ "glob": "timeToStop.mp3", "input": "./", "output": "./assets/" },
 		{ "glob": "cantgetup.mp3", "input": "./", "output": "./assets/" },
-		{ "glob": "zawarudo.mp3", "input": "./", "output": "./assets/" }
-		
-        // Profile pictures
+		{ "glob": "zawarudo.mp3", "input": "./", "output": "./assets/" },
         { "glob": "player1.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player2.jpg", "input": "./", "output": "./assets/" },
         { "glob": "player3.jpg", "input": "./", "output": "./assets/" },

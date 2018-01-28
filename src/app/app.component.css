@@ -2,6 +2,9 @@
   box-sizing: border-box;
 }
 
+h2, span{
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
 h2{
   margin: 0;
@@ -133,6 +136,14 @@ h2{
 
 .grid>div>div.placeholder{
   background-color: #acacac;
+}
+
+.grid>div>div.answered-right{
+  border: 8px solid #258233;
+}
+
+.grid>div>div.answered-wrong{
+  border: 8px solid maroon;
 }
 
 .selected-cards-holder {
